@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>旅の手帖</title>
+<meta name="description" content="都道府県ごとに旅の写真と動画を綴る、セピア色の旅日記">
+<meta name="theme-color" content="#e9dab9">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="旅の手帖">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Klee+One:wght@400;600&family=Shippori+Mincho:wght@500;700&family=Special+Elite&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ===== 地図（ホーム） ===== -->
+<main id="home" class="view">
+  <header class="masthead">
+    <p class="eyebrow">TRAVEL JOURNAL · <span id="year"></span></p>
+    <h1>旅の手帖</h1>
+    <p class="lede">めぐった土地を、ひとつずつ綴じていく。</p>
+    <div class="tally">
+      <div><b id="visitedCount">0</b><span>/ 47 都道府県</span></div>
+      <div><b id="totalCount">0</b><span>枚の記録</span></div>
+    </div>
+  </header>
+
+  <section class="map-card">
+    <div class="map-wrap" id="mapWrap">
+      <svg id="map" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="日本地図"></svg>
+    </div>
+    <div class="map-tools">
+      <span class="hint">都道府県をタップして開く · ふたつの指で拡大</span>
+      <span class="zoom">
+        <button type="button" id="zoomOut" aria-label="縮小">−</button>
+        <button type="button" id="zoomReset" aria-label="全体表示">◎</button>
+        <button type="button" id="zoomIn" aria-label="拡大">＋</button>
+      </span>
+    </div>
+  </section>
+
+  <section class="index">
+    <h2>目次</h2>
+    <div id="regionList"></div>
+  </section>
+
+  <footer class="colophon">
+    写真と動画はこの iPhone の中だけに保存されます。
+  </footer>
+</main>
+
+<!-- ===== 都道府県アルバム ===== -->
+<main id="album" class="view" hidden>
+  <nav class="topbar">
+    <button type="button" class="back" id="backBtn">← 地図へ</button>
+    <span class="no" id="albumNo"></span>
+  </nav>
+  <header class="album-head">
+    <p class="romaji" id="albumRomaji"></p>
+    <h1 id="albumTitle"></h1>
+    <p class="meta" id="albumMeta"></p>
+  </header>
+  <div id="albumBody"></div>
+  <div class="fab-space"></div>
+  <label class="fab" id="addBtn">
+    <input type="file" id="fileInput" accept="image/*,video/*" multiple>
+    <span class="plus">＋</span> 写真・動画を貼る
+  </label>
+</main>
+
+<!-- ===== ビューア ===== -->
+<div id="viewer" hidden>
+  <div class="v-top">
+    <button type="button" id="vClose" aria-label="閉じる">✕</button>
+    <span id="vCount"></span>
+    <button type="button" id="vTone" class="pill">色褪せ</button>
+  </div>
+  <div class="v-stage" id="vStage"></div>
+  <button type="button" class="v-nav prev" id="vPrev" aria-label="前へ">‹</button>
+  <button type="button" class="v-nav next" id="vNext" aria-label="次へ">›</button>
+  <div class="v-panel">
+    <label class="v-date">日付 <input type="date" id="vDate"></label>
+    <textarea id="vCaption" rows="2" placeholder="ひとことメモ…"></textarea>
+    <div class="v-actions">
+      <button type="button" id="vShare">共有・保存</button>
+      <button type="button" id="vDelete" class="danger">削除</button>
+    </div>
+    <div class="v-confirm" id="vConfirm" hidden>
+      <span>この記録を削除しますか？</span>
+      <button type="button" id="vDeleteYes" class="danger">削除する</button>
+      <button type="button" id="vDeleteNo">やめる</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" hidden></div>
+
+<script src="japan-map.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
